@@ -76,18 +76,18 @@ class TestAppend:
         valTwo = TestAppend.linkedList.getValueAt(2)
         valThree = TestAppend.linkedList.getValueAt(4)
 
-        with pytest.raises(IndexError) as excinfo:
+        with pytest.raises(IndexError) as excinfoOne:
             TestAppend.linkedList.getValueAt(-99)
 
-        with pytest.raises(IndexError) as excinfo:
+        with pytest.raises(IndexError) as excinfoTwo:
             TestAppend.linkedList.getValueAt(99)
 
         # assert
         assert valOne == 91
         assert valTwo == 21
         assert valThree == 81
-        assert excinfo.value.message == "Value given out of range"
-        assert excinfo.value.message == "Value given out of range"
+        assert excinfoOne.value.message == "Value given out of range"
+        assert excinfoTwo.value.message == "Value given out of range"
 
     # Evaluates whether this method is able to retrieve the count of a list.
     def test_count(self):
