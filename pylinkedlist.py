@@ -1,59 +1,6 @@
 import unittest
 
 class LinkedList():
-    # 50, 15, 10
-    # insert at 1
-    # prev needs new connection to new node
-    # new node needs connection to 10
-    def insertAt(self, pos, node):
-        if pos < 0:
-           raise IndexError("Value given out of range") 
-        elif self.head == None and pos > 0: # list.count() = ? and pos is out of range
-           raise IndexError("Value given out of range") 
-        elif self.head == None and pos == 0: # List.count() = 0 and pos = 0
-           self.head = node
-        elif pos == 0: # List.count() = 0 and pos = 0
-            node.next = self.head 
-            self.head = node
-        else:
-            count = 0
-            currentNode = self.head 
-
-            while currentNode.next != None:
-                prevNode = currentNode
-                currentNode = currentNode.next
-                count += 1
-                if pos == count:
-                    currentNode = node.next
-                    prevNode.next = node 
-
-
-
-
-
-
-
-
-
-
-
-
-        ## I want to insert at pos higher than 0, but 0 doesn't exist
-        #if self.head == None and pos != 0:
-        #   raise IndexError("Value given out of range") 
-        #elif self.head == None and pos == 0:
-        #   self.head = node
-        #else:
-        #    count = 0
-        #    currentNode = self.head 
-
-        #    while currentNode.next != None:
-        #        prevNode = currentNode
-        #        currentNode = currentNode.next
-        #        count += 1
-        #        if pos == count:
-        #            currentNode = node.next
-        #            prevNode.next = node 
 
     def append(self, node):
         if self.head == None:
@@ -70,11 +17,50 @@ class LinkedList():
         if self.head == None:
             self.head = node
         else:
-            remember = self.head 
+            nodeToMove = self.head 
             self.head = node
-            self.head.next = remember
+            self.head.next = nodeToMove 
 
-    def logAll(self):
+    def insertAt(self, pos, node):
+        if (self.head == None) and (pos == 0): # List.count() = 0 and pos = 0
+           self.head = node
+        elif pos < 0:
+           raise IndexError("Value given out of range") 
+        elif (self.head == None) and (pos > 0): # list.count() = ? and pos is out of range
+           raise IndexError("Value given out of range") 
+        elif pos == 0: # List.count() = 0 and pos = 0
+            node.next = self.head 
+            self.head = node
+        else:
+            count = 0
+            currentNode = self.head 
+
+            while currentNode.next != None:
+                prevNode = currentNode
+                currentNode = currentNode.next
+                count += 1
+                if pos == count:
+                    node.next = currentNode
+                    prevNode.next = node 
+
+            # If a value needs to be inserted at the very end
+            if pos == count + 1: 
+                currentNode.next = node
+            elif pos > count + 1:
+                raise IndexError("Value given out of range") 
+
+    def last(self):
+        if self.head == None:
+           raise IndexError("Value given out of range") 
+        else:
+            currentNode = self.head 
+
+            while currentNode.next != None:
+                currentNode = currentNode.next
+
+            return currentNode
+
+    def printAll(self):
         if self.head == None:
             print ""
         else:
@@ -84,6 +70,25 @@ class LinkedList():
             while currentNode.next != None:
                 currentNode = currentNode.next
                 print currentNode.getData()
+
+    def printAllReverse(self):
+        allValues = []
+
+        if self.head == None:
+           raise IndexError("Value given out of range") 
+        else:
+            currentNode = self.head 
+            allValues.append(self.head.getData())
+
+            while currentNode.next != None:
+                currentNode = currentNode.next
+                allValues.append(currentNode.getData())
+
+        allValues.reverse()
+
+        for value in allValues:
+            print value 
+
 
     def count(self):
         count = 0
@@ -165,9 +170,3 @@ class Node():
 
     def getData(self):
        return self.data
-
-mll = LinkedList()
-mll.append(node = Node(15))
-mll.append(node = Node(45))
-mll.insertAt(1, node = Node(25))
-mll.logAll()
