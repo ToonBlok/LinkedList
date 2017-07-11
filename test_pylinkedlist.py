@@ -60,7 +60,7 @@ class TestAppend:
         lastNode = TestAppend.linkedList.last()
 
         # assert
-        assert lastNode.getData() == 30
+        assert lastNode.data == 30
 
     # Evaluates whether this method is able to retrieve the value of the a specific node and whether the list handles index out of range exception.
     def test_getValueAt(self):

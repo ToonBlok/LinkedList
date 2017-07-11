@@ -65,11 +65,11 @@ class LinkedList():
             print ""
         else:
             currentNode = self.head 
-            print self.head.getData()
+            print self.head.data
 
             while currentNode.next != None:
                 currentNode = currentNode.next
-                print currentNode.getData()
+                print currentNode.data
 
     def printAllReverse(self):
         allValues = []
@@ -78,11 +78,11 @@ class LinkedList():
            raise IndexError("Value given out of range") 
         else:
             currentNode = self.head 
-            allValues.append(self.head.getData())
+            allValues.append(self.head.data)
 
             while currentNode.next != None:
                 currentNode = currentNode.next
-                allValues.append(currentNode.getData())
+                allValues.append(currentNode.data)
 
         allValues.reverse()
 
@@ -116,13 +116,13 @@ class LinkedList():
         else:
             currentNode = self.head 
             if pos == count:
-                return self.head.getData()
+                return self.head.data
             else:
                 while currentNode.next != None:
                     count += 1
                     currentNode = currentNode.next
                     if pos == count:
-                        return currentNode.getData()
+                        return currentNode.data
                 # If pos is STILL higher than max count reached, it is out of range
                 if pos > count:
                    raise IndexError("Value given out of range") 
@@ -168,5 +168,3 @@ class Node():
         self.next = None
         self.data = data 
 
-    def getData(self):
-       return self.data
